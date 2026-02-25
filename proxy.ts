@@ -6,7 +6,7 @@ export async function proxy(req:NextRequest) {
 
   res.headers.set(
     "Access-Control-Allow-Origin",
-    "http://localhost:5173"
+    "*"
   );
   res.headers.set(
     "Access-Control-Allow-Headers",
