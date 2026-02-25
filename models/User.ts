@@ -6,6 +6,7 @@ interface UserDocumentInterface extends Document{
     email:string,
     merchantId:string,
     password:string
+    authToken:string
 }
 
 const UserSchema:Schema<UserDocumentInterface > = new Schema({
@@ -27,6 +28,10 @@ const UserSchema:Schema<UserDocumentInterface > = new Schema({
     },
     merchantId:{
         type:String
+    },
+    authToken:{
+        type:String,
+        required:false
     }
 },{
     timestamps:true
