@@ -12,7 +12,7 @@ export async function POST(req:NextRequest):Promise<NextResponse> {
         const body = await req.json()
         const isValidRequest = userRegistrationValidation.safeParse(body)
         if(!isValidRequest.success){
-            return badRequest("please provide valid request!")
+            return badRequest(isValidRequest.error.message ||"please provide valid request!")
         }
 
         // databse connection
@@ -24,10 +24,9 @@ export async function POST(req:NextRequest):Promise<NextResponse> {
 
         // alaready existance 
         const isExist = await User.find({$or:[
-            {email:{$regex:body.email, $options:'i'}},
-            {phoneNumber:{$regex:body.phoneNumber, $options:"i"}}
+            {email:{$regex:body.email, $options:'i'}}   
         ]}).lean().select("_id")
-        if(isExist){
+        if(isExist.length >0){
             return conflictError("user already register with these record!")
         }
 
@@ -59,11 +58,17 @@ export async function POST(req:NextRequest):Promise<NextResponse> {
         // if failed to creatte and save token 
         if(!isSavedToCookie.isCreated || !isSavedToCookie.token) return internalServerIssue(new Error("Internal server issue!"))
         
+        /// savingg also in database 
+        userDoc.authToken    = isSavedToCookie.token
+        await userDoc.save()
+        
         /// return tokne with successResponse
         return NextResponse.json({
             success:true,
             status:HttpStatusCode.CREATED,
             token:isSavedToCookie.token
+        },{
+            status:HttpStatusCode.CREATED
         })
     } catch (error) {
         console.log(error)
