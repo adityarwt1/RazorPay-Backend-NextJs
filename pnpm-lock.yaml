@@ -26,6 +26,9 @@ importers:
       razor-pay-backend:
         specifier: 'link:'
         version: 'link:'
+      razor-pay-clone-adi:
+        specifier: ^1.0.3
+        version: 1.0.3
       react:
         specifier: 19.2.3
         version: 19.2.3
@@ -929,6 +932,10 @@ packages:
     resolution: {integrity: sha512-35mSku4ZXK0vfCuHEDAwt55dg2jNajHZ1odvF+8SSr82EsZY4QmXfuWso8oEd8zRhVObSN18aM0CjSdoBX7zIw==}
     engines: {node: '>=0.10.0'}
 
+  dotenv@17.3.1:
+    resolution: {integrity: sha512-IO8C/dzEb6O3F9/twg6ZLXz164a2fhTnEWb95H23Dm4OuN+92NmEAlTrupP9VW6Jm3sO26tQlqyvyi4CsnY9GA==}
+    engines: {node: '>=12'}
+
   dunder-proto@1.0.1:
     resolution: {integrity: sha512-KIN/nDJBQRcXw0MLVhZE9iQHmG68qAVIBg9CqmUYjmQIhgij9U5MFvrqkUL5FbtyyzZuOeOt0zdeRe4UY7ct+A==}
     engines: {node: '>= 0.4'}
@@ -1765,6 +1772,9 @@ packages:
 
   queue-microtask@1.2.3:
     resolution: {integrity: sha512-NuaNSa6flKT5JaSYQzJok04JzTL1CA6aGhv5rfLW3PgqA+M2ChpZQnAC8h8i4ZFkBS8X5RqkDBHA7r4hej3K9A==}
+
+  razor-pay-clone-adi@1.0.3:
+    resolution: {integrity: sha512-nebxhEDUWC88gsC2hybATmi4wtWxsuuYPN+XZwqCkm9HC27tlAAWqQtbm4rR3VzwrQDIZzaaySz2kaOEG6l2jQ==}
 
   react-dom@19.2.3:
     resolution: {integrity: sha512-yELu4WmLPw5Mr/lmeEpox5rw3RETacE++JgHqQzd2dg+YbJuat3jH4ingc+WPZhxaoFzdv9y33G+F7Nl5O0GBg==}
@@ -2919,6 +2929,8 @@ snapshots:
     dependencies:
       esutils: 2.0.3
 
+  dotenv@17.3.1: {}
+
   dunder-proto@1.0.1:
     dependencies:
       call-bind-apply-helpers: 1.0.2
@@ -3881,6 +3893,10 @@ snapshots:
   punycode@2.3.1: {}
 
   queue-microtask@1.2.3: {}
+
+  razor-pay-clone-adi@1.0.3:
+    dependencies:
+      dotenv: 17.3.1
 
   react-dom@19.2.3(react@19.2.3):
     dependencies:

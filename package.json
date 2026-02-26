@@ -15,6 +15,7 @@
     "mongoose": "^9.2.2",
     "next": "16.1.6",
     "razor-pay-backend": "link:",
+    "razor-pay-clone-adi": "^1.0.3",
     "react": "19.2.3",
     "react-dom": "19.2.3",
     "uuid": "^13.0.0",
