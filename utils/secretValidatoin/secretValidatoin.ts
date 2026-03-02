@@ -33,7 +33,7 @@ const apiAndSecretValidation = async (req:NextRequest):Promise<APIandServicesRes
             }
         }
         
-        /// services available for now or waht
+        // services available for now or waht
         
     } catch (error) {
         console.log(error)
