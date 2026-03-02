@@ -45,6 +45,9 @@ importers:
       '@tailwindcss/postcss':
         specifier: ^4
         version: 4.2.1
+      '@types/cryptojs':
+        specifier: ^3.1.33
+        version: 3.1.33
       '@types/jsonwebtoken':
         specifier: ^9.0.10
         version: 9.0.10
@@ -531,6 +534,9 @@ packages:
 
   '@tybys/wasm-util@0.10.1':
     resolution: {integrity: sha512-9tTaPJLSiejZKx+Bmog4uSubteqTvFrVrURwkmHixBo0G4seD0zUxp98E1DzUBJxLQ3NPwXrGKDiVjwx/DpPsg==}
+
+  '@types/cryptojs@3.1.33':
+    resolution: {integrity: sha512-7jvZ6Y0Y4Vq7gDkanLiiaj/LaIS8J/wvJ8k0bE2XMFVg+LK9El2eyNCxuz8xJrk3YVmEbSLxk1EFjXUCDkdN4w==}
 
   '@types/estree@1.0.8':
     resolution: {integrity: sha512-dWHzHa2WqEXI/O1E9OjrocMTKJl2mSrEolh1Iomrv6U+JuNwaHXsXx9bLu5gG7BUWFIN0skIQJQ/L1rIex4X6w==}
@@ -2518,6 +2524,8 @@ snapshots:
     dependencies:
       tslib: 2.8.1
     optional: true
+
+  '@types/cryptojs@3.1.33': {}
 
   '@types/estree@1.0.8': {}
 
