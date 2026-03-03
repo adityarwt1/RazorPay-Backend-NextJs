@@ -3,17 +3,18 @@
 import { connectMongoDb } from "@/lib/mongodbConnection"
 import { NextRequest } from "next/server"
 import { HttpStatusText } from "../apiResponses"
-import crypto from "cryptojs"
+import  crypto from "crypto-js"
+import Service from "@/models/services"
 interface APIandServicesResultInterface {
-    isValid:false,
-    error?:HttpStatusText
+    isValid:boolean
+    error?:HttpStatusText | string
     
 }
 interface CryptoSecretInterface {
     apiKey:string,
     secretKey:string
 }
-const apiAndSecretValidation = async (req:NextRequest):Promise<APIandServicesResultInterface>=>{
+export const apiAndSecretValidation = async (req:NextRequest):Promise<APIandServicesResultInterface>=>{
     try {
         const authSecret = req.headers.get(process.env.HEADER_SECRET as string) 
         // if header not provided yett  
@@ -23,7 +24,16 @@ const apiAndSecretValidation = async (req:NextRequest):Promise<APIandServicesRes
             }
         }
         // decoding value
-        const decoded:CryptoSecretInterface  = await crypto.AES.decode(authSecret)
+        const decoded:CryptoSecretInterface  = JSON.parse(crypto.AES.decrypt(authSecret, process.env.CRYPTO_SECRET as string).toString(crypto.enc.Utf8))
+        //if value is not inlside the decode
+        if(!decoded.apiKey || !decoded.secretKey){
+            return {
+                isValid:false,
+                error:"apikey and secret not provided yet!"
+            }
+        }
+
+        // 
         /// when faild to connected database
         const isConnected = await connectMongoDb()
         if(!isConnected){
@@ -34,7 +44,22 @@ const apiAndSecretValidation = async (req:NextRequest):Promise<APIandServicesRes
         }
         
         // services available for now or waht
-        
+        const isExist = await Service.findOne({
+            apiKey:decoded.apiKey,
+            secretKey:decoded.secretKey
+        })
+
+        // is servicdes currentyly not available yet
+        if(!isExist || !isExist.available){
+            return {
+                isValid:false,
+                error:"service currently not available with this secret key and apikey!"
+            }
+        }
+
+        return {
+            isValid:true
+        }
     } catch (error) {
         console.log(error)
         return {
