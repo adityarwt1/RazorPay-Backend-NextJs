@@ -8,11 +8,16 @@ import Service from "@/models/services"
 interface APIandServicesResultInterface {
     isValid:boolean
     error?:HttpStatusText | string
-    
+    data?:CryptoSecretInterface
+    authorId?:string
+    amount?:number
+    orderId?:string
 }
 interface CryptoSecretInterface {
     apiKey:string,
-    secretKey:string
+    secretKey:string,
+    amount?:number,
+    orderId:string
 }
 export const apiAndSecretValidation = async (req:NextRequest):Promise<APIandServicesResultInterface>=>{
     try {
@@ -20,7 +25,8 @@ export const apiAndSecretValidation = async (req:NextRequest):Promise<APIandServ
         // if header not provided yett  
         if(!authSecret){
             return {
-                isValid:false
+                isValid:false,
+                error:"Crypto Secret not provided!"
             }
         }
         // decoding value
@@ -58,7 +64,9 @@ export const apiAndSecretValidation = async (req:NextRequest):Promise<APIandServ
         }
 
         return {
-            isValid:true
+            isValid:true,
+            data:decoded,
+            authorId:isExist.authorId,
         }
     } catch (error) {
         console.log(error)

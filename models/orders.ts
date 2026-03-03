@@ -3,6 +3,7 @@ import mongoose, { Schema } from "mongoose";
 interface OrderInterface {
     merchantId:mongoose.Types.ObjectId | string,
     amount:number
+    paid:boolean
 }
 
 const OrderSchema:Schema<OrderInterface> = new Schema({
@@ -13,6 +14,10 @@ const OrderSchema:Schema<OrderInterface> = new Schema({
     merchantId:{
         type:Schema.Types.ObjectId,
         required:true
+    },
+    paid:{
+        type:Boolean,
+        requuired:true
     }
 },{
     timestamps:true
